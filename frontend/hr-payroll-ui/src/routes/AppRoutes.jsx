@@ -9,6 +9,7 @@ import NotFoundPage from "../pages/notfound/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AttendancePage from "../pages/attendance/AttendancePage";
 import LeavePage from "../pages/leave/LeavePage";
+import PayrollPage from "../pages/payroll/PayrollPage";
 
 function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ function AppRoutes() {
           <Route path="/employees/edit/:id" element={<EditEmployeePage />} />
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/leaves" element={<LeavePage />} />
+          <Route path="/payroll" element={<PayrollPage />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />
