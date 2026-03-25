@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers("/health", "/api/v1/auth/login").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/hr/**").hasAnyRole("HR", "ADMIN")
+                        .requestMatchers("/api/v1/employees/**").hasAnyRole("HR", "ADMIN")
                         .requestMatchers("/api/v1/employee/**").hasAnyRole("EMPLOYEE", "HR", "ADMIN")
                         .requestMatchers("/api/v1/secure/**").authenticated()
                         .anyRequest().permitAll()
