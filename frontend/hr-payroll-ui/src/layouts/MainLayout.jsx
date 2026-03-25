@@ -29,6 +29,7 @@ function MainLayout() {
           <Link to="/attendance">Attendance</Link>
           <Link to="/leaves">Leaves</Link>
           <Link to="/payroll">Payroll</Link>
+          <Link to="/reports">Reports</Link>
         </div>
 
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>

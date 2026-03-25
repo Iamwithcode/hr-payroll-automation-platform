@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AttendancePage from "../pages/attendance/AttendancePage";
 import LeavePage from "../pages/leave/LeavePage";
 import PayrollPage from "../pages/payroll/PayrollPage";
+import ReportsPage from "../pages/reports/ReportsPage";
 
 function AppRoutes() {
   return (
@@ -31,6 +32,7 @@ function AppRoutes() {
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/leaves" element={<LeavePage />} />
           <Route path="/payroll" element={<PayrollPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />
