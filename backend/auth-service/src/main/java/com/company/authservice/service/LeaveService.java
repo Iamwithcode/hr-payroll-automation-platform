@@ -8,6 +8,9 @@ import com.company.authservice.enums.LeaveType;
 import com.company.authservice.exception.ResourceNotFoundException;
 import com.company.authservice.repository.LeaveRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,13 +20,16 @@ import java.util.List;
 @Service
 public class LeaveService {
 
+    private static final Logger logger = LoggerFactory.getLogger(LeaveService.class);
     private final LeaveRepository leaveRepository;
 
     public LeaveService(LeaveRepository leaveRepository) {
         this.leaveRepository = leaveRepository;
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public LeaveResponseDto applyLeave(LeaveRequestDto requestDto) {
+        logger.info("Applying leave for employee id: {}", requestDto.getEmployeeId());
         LocalDate startDate = LocalDate.parse(requestDto.getStartDate());
         LocalDate endDate = LocalDate.parse(requestDto.getEndDate());
 
@@ -61,7 +67,9 @@ public class LeaveService {
                 .toList();
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public LeaveResponseDto approveLeave(Long id, Long approvedBy) {
+        logger.info("Approving leave id: {} by approver: {}", id, approvedBy);
         LeaveRequest leaveRequest = leaveRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave request not found with id: " + id));
 
@@ -73,7 +81,9 @@ public class LeaveService {
         return mapToResponse(updated);
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public LeaveResponseDto rejectLeave(Long id, Long approvedBy) {
+        logger.info("Rejecting leave id: {} by approver: {}", id, approvedBy);
         LeaveRequest leaveRequest = leaveRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave request not found with id: " + id));
 

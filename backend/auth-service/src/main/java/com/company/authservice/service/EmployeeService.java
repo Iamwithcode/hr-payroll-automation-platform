@@ -7,12 +7,16 @@ import com.company.authservice.enums.EmployeeStatus;
 import com.company.authservice.exception.ResourceNotFoundException;
 import com.company.authservice.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Service
 public class EmployeeService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
     private final EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -33,7 +37,9 @@ public class EmployeeService {
         return mapToResponse(employee);
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public EmployeeResponse createEmployee(EmployeeRequest request) {
+        logger.info("Creating employee with code: {}", request.getEmployeeCode());
         Employee employee = new Employee();
         mapRequestToEmployee(request, employee);
 
@@ -41,7 +47,9 @@ public class EmployeeService {
         return mapToResponse(savedEmployee);
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public EmployeeResponse updateEmployee(Long id, EmployeeRequest request) {
+        logger.info("Updating employee with id: {}", id);
         Employee existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
 

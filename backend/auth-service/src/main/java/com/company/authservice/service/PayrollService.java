@@ -6,6 +6,9 @@ import com.company.authservice.entity.PayrollRecord;
 import com.company.authservice.enums.PayrollStatus;
 import com.company.authservice.repository.PayrollRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,13 +18,16 @@ import java.util.List;
 @Service
 public class PayrollService {
 
+    private static final Logger logger = LoggerFactory.getLogger(PayrollService.class);
     private final PayrollRepository payrollRepository;
 
     public PayrollService(PayrollRepository payrollRepository) {
         this.payrollRepository = payrollRepository;
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public PayrollResponseDto generatePayroll(PayrollRequestDto requestDto) {
+        logger.info("Generating payroll for employee id: {} and month: {}", requestDto.getEmployeeId(), requestDto.getPayrollMonth());
         validatePayrollRequest(requestDto);
 
         int absentDays = requestDto.getWorkingDays() - (requestDto.getPresentDays() + requestDto.getLeaveDays());

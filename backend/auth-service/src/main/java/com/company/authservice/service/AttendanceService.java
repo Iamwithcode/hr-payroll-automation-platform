@@ -6,6 +6,9 @@ import com.company.authservice.entity.Attendance;
 import com.company.authservice.enums.AttendanceStatus;
 import com.company.authservice.repository.AttendanceRepository;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,13 +17,16 @@ import java.util.List;
 @Service
 public class AttendanceService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
     private final AttendanceRepository attendanceRepository;
 
     public AttendanceService(AttendanceRepository attendanceRepository) {
         this.attendanceRepository = attendanceRepository;
     }
 
+    @CacheEvict(value = "reportSummary", allEntries = true)
     public AttendanceResponse markAttendance(AttendanceRequest request) {
+        logger.info("Marking attendance for employee id: {}", request.getEmployeeId());
         Attendance attendance = new Attendance();
         attendance.setEmployeeId(request.getEmployeeId());
         attendance.setAttendanceDate(LocalDate.parse(request.getAttendanceDate()));
