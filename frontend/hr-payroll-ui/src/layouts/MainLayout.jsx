@@ -26,6 +26,7 @@ function MainLayout() {
           <h3 style={{ margin: 0 }}>HR Payroll Platform</h3>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/employees">Employees</Link>
+          <Link to="/attendance">Attendance</Link>
         </div>
 
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
