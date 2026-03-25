@@ -1,4 +1,8 @@
 package com.company.authservice.enums;
 
-public class AttendanceStatus {
+public enum AttendanceStatus {
+    PRESENT,
+    ABSENT,
+    HALF_DAY,
+    WFH
 }
