@@ -1,14 +1,7 @@
-import { useEffect } from "react";
-import axios from "axios";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  useEffect(() => {
-    axios.get("http://localhost:8080/health")
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
-  return <h1>HR Payroll Platform</h1>;
+  return <AppRoutes />;
 }
 
 export default App;

@@ -1,0 +1,26 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import LoginPage from "../pages/auth/LoginPage";
+import DashboardPage from "../pages/dashboard/DashboardPage";
+import EmployeesPage from "../pages/employees/EmployeesPage";
+import NotFoundPage from "../pages/notfound/NotFoundPage";
+
+function AppRoutes() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        <Route element={<MainLayout />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/employees" element={<EmployeesPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default AppRoutes;
