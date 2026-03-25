@@ -1,0 +1,28 @@
+# Java
+target/
+*.class
+*.log
+.mvn/
+.idea/
+*.iml
+
+# Node
+node_modules/
+dist/
+build/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+
+# Maven wrapper files can be committed later if needed
