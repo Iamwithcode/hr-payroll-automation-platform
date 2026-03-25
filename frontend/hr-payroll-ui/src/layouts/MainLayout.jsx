@@ -17,10 +17,9 @@ function MainLayout() {
           padding: "16px 24px",
           borderBottom: "1px solid #ddd",
           display: "flex",
-          gap: "20px",
-          alignItems: "center",
           justifyContent: "space-between",
-          background: "#fff"
+          alignItems: "center",
+          background: "#fff",
         }}
       >
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
@@ -29,15 +28,9 @@ function MainLayout() {
           <Link to="/employees">Employees</Link>
         </div>
 
-        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-          {auth.isAuthenticated ? (
-            <>
-              <span>{auth.username} ({auth.role})</span>
-              <button onClick={handleLogout}>Logout</button>
-            </>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
+        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <span>{auth.username} ({auth.role})</span>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </nav>
 
