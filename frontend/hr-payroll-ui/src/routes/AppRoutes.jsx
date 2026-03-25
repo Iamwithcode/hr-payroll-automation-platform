@@ -8,6 +8,7 @@ import EditEmployeePage from "../pages/employees/EditEmployeePage";
 import NotFoundPage from "../pages/notfound/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AttendancePage from "../pages/attendance/AttendancePage";
+import LeavePage from "../pages/leave/LeavePage";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
           <Route path="/employees/add" element={<AddEmployeePage />} />
           <Route path="/employees/edit/:id" element={<EditEmployeePage />} />
           <Route path="/attendance" element={<AttendancePage />} />
+          <Route path="/leaves" element={<LeavePage />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />
